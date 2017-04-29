@@ -11,13 +11,13 @@
         android:scrollbars="none">
 
         <LinearLayout
-            android:id="@+id/word_entry_linear"
+            android:id="@+id/master_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/word_entry"
+                android:id="@+id/word_entry_linear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -52,7 +52,7 @@
                 android:id="@+id/game_grid_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/word_entry"
+                android:layout_below="@+id/word_entry_linear"
                 android:layout_marginBottom="32dp"
                 app:columnCount="5"
                 app:horizontalSpace="1.3dp"
