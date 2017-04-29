@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Mootz</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_opp_letters">them</string>
+    <string name="title__my_letters">you</string>
+    <string name="title_clue_letters">clues</string>
+    <string name="title_enter_word">Enter a 5 letter word.. no repeating letters</string>
+</resources>
