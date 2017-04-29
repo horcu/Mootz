@@ -13,45 +13,46 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class MainView extends AppCompatActivity {
 
-    private EditText mTextMessage;
+    private EditText userWordEditText;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+//            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+//
+//        @Override
+//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//            switch (item.getItemId()) {
+//                case R.id.navigation_home:
+//                    userWordEditText.setText(R.string.title_home);
+//                    return true;
+//                case R.id.navigation_dashboard:
+//                    userWordEditText.setText(R.string.title_dashboard);
+//                    return true;
+//                case R.id.navigation_notifications:
+//                    userWordEditText.setText(R.string.title_notifications);
+//                    return true;
+//            }
+//            return false;
+//        }
+//
+//    };
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-
-    };
+    private GameboardGrid letterGridUser;
     private GameboardGrid letterGrid;
     private TreeMap<Integer, String> alphaMap;
     private ImageView mSetWord;
     private String currentWord;
+    private LinearLayout wEntryLinear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,10 @@ public class MainView extends AppCompatActivity {
         if(getActionBar()!=null)
         getActionBar().hide();
 
+        wEntryLinear = (LinearLayout) findViewById(R.id.word_entry_linear);
+
+
+        userWordEditText = (EditText) findViewById(R.id.message);
         mSetWord = (ImageView)findViewById(R.id.set_word);
         mSetWord.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,11 +84,18 @@ public class MainView extends AppCompatActivity {
 
                 //set the remaining letters in alpha order
                 SetRemainingRows(remLetters);
+
+                //show the letters
+                letterGrid.setVisibility(View.VISIBLE);
+
+                //hide the edit text. need to add an icon in the top bar or somewhere else
+                // that can bring it back to change the word if user changed mind
+                wEntryLinear.setVisibility(View.GONE);
             }
         });
 
-        mTextMessage = (EditText) findViewById(R.id.message);
-        mTextMessage.addTextChangedListener(new TextWatcher() {
+
+        userWordEditText.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -96,10 +108,13 @@ public class MainView extends AppCompatActivity {
                         UnHighlightTile(String.valueOf(currentWord.charAt(i)));
                     }
 
+                    letterGridUser.setVisibility(View.INVISIBLE);
+                    letterGrid.setVisibility(View.INVISIBLE);
                     return;
                 }
 
-
+                    letterGridUser.setVisibility(View.VISIBLE);
+                    letterGrid.setVisibility(View.VISIBLE);
                 currentWord = s.toString();
             }
 
@@ -128,9 +143,11 @@ public class MainView extends AppCompatActivity {
         });
 
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        letterGrid = (GameboardGrid)findViewById(R.id.game_grid);
+        //BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+       // navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        letterGridUser = (GameboardGrid)findViewById(R.id.game_grid_user);
+        letterGrid = (GameboardGrid)findViewById(R.id.game_grid_opp);
 
        ArrayList<String> alpha = new ArrayList<String>()
        {{ add("A");add("B"); add("C"); add("D");add("E");add("F");add("G");add("H"); add("I");add("J");add("K");add("L");
@@ -143,11 +160,7 @@ public class MainView extends AppCompatActivity {
             alphaMap.put(i,alpha.get(i));
         }
 
-        SetInitBoard(navigation, alpha);
-    }
-
-    private void AlphabetizeRemainingLetters(TreeMap<Integer, String> remLetters) {
-       // Collections.sort(remLetters);
+        SetInitBoard(letterGrid, alpha);
     }
 
     private TreeMap<Integer, String> GetRemainingLetters() {
@@ -171,7 +184,7 @@ public class MainView extends AppCompatActivity {
     private void RearrangeFirstRow() {
 
         for(int i=0; i < 5; i++){
-            GameboardCard letterCard = (GameboardCard) letterGrid.getChildAt(i);
+            GameboardCard letterCard = (GameboardCard) letterGridUser.getChildAt(i);
             ImageView img = (ImageView) letterCard.findViewById(R.id.tile_letter);
             PaintLetterTile(String.valueOf(currentWord.charAt(i)), img, "#4caf50");
         }
@@ -179,14 +192,22 @@ public class MainView extends AppCompatActivity {
 
     private void SetRemainingRows(TreeMap<Integer, String> remLetters) {
 
+        for(int i=0; i < 5; i++){
+            GameboardCard letterCard = (GameboardCard) letterGrid.getChildAt(i);
+            ImageView img = (ImageView) letterCard.findViewById(R.id.tile_letter);
+            PaintLetterTile("", img, "#ffffff");
+        }
+
         for(int i=0; i < 20; i++){
             int spot = i+5;
-            GameboardCard letterCard = (GameboardCard) letterGrid.getChildAt(spot);
-            ImageView img = (ImageView) letterCard.findViewById(R.id.tile_letter);
 
-            Map.Entry<Integer,String> entry = (Map.Entry<Integer, String>) remLetters.entrySet().toArray()[i];
-            String letter = entry.getValue();
-            PaintLetterTile(letter, img, "#edebec");
+                GameboardCard letterCard = (GameboardCard) letterGrid.getChildAt(spot);
+                ImageView img = (ImageView) letterCard.findViewById(R.id.tile_letter);
+
+                Map.Entry<Integer, String> entry = (Map.Entry<Integer, String>) remLetters.entrySet().toArray()[i];
+
+                String letter = entry.getValue();
+                PaintLetterTile(letter, img, "#edebec");
         }
 
     }
@@ -221,7 +242,14 @@ public class MainView extends AppCompatActivity {
         return null;
     }
 
-    private void SetInitBoard(BottomNavigationView navigation, ArrayList<String> alpha) {
+    private void SetInitBoard(ViewGroup navigation, ArrayList<String> alpha) {
+        //set up the grid for the user's word
+        for (int i = 0; i < 5; i++) {
+            final GameboardCard relativeLayout = (GameboardCard) getLayoutInflater().inflate(R.layout.letter_tile, (ViewGroup)navigation.getParent(), false);
+            letterGridUser.addView(relativeLayout,i);
+        }
+
+        //set up the grid for the opponents remaining letters
         for (int i = 0; i < 25; i++) {
 
             final GameboardCard relativeLayout = (GameboardCard) getLayoutInflater().inflate(R.layout.letter_tile, (ViewGroup)navigation.getParent(), false);
