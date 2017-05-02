@@ -25,10 +25,29 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile project(path: ':GameCreatorSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameDestroyerSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameScoreSvc', configuration: 'android-endpoints')
+
+    compile project(path: ':GameMessagingSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameMonitoringSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameCleanupSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameNotificationSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameStartSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameStopSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameLoggingSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameAuthSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameStateSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameSubscriptionSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameFriendsSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameArchiveSvc', configuration: 'android-endpoints')
+    compile project(path: ':GameManagerSvc', configuration: 'android-endpoints')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-vector-drawable:25.3.1'
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
     compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.google.code.findbugs:jsr305:2.0.1'
     testCompile 'junit:junit:4.12'
+    compile project(path: ':Ear-Svc', configuration: 'android-endpoints')
 }

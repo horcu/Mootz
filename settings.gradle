@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':GameCreatorSvc', ':GameDestroyerSvc', ':GameScoreSvc', ':GameMessagingSvc', ':GameMonitoringSvc', ':GameCleanupSvc', ':GameNotificationSvc', ':GameStartSvc', ':GameStopSvc', ':GameLoggingSvc', ':GameAuthSvc', ':GameStateSvc', ':GameSubscriptionSvc', ':GameFriendsSvc', ':GameArchiveSvc', ':GameManagerSvc', ':Ear-Svc'

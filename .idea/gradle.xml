@@ -8,6 +8,23 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Ear-Svc" />
+            <option value="$PROJECT_DIR$/GameArchiveSvc" />
+            <option value="$PROJECT_DIR$/GameAuthSvc" />
+            <option value="$PROJECT_DIR$/GameCleanupSvc" />
+            <option value="$PROJECT_DIR$/GameCreatorSvc" />
+            <option value="$PROJECT_DIR$/GameDestroyerSvc" />
+            <option value="$PROJECT_DIR$/GameFriendsSvc" />
+            <option value="$PROJECT_DIR$/GameLoggingSvc" />
+            <option value="$PROJECT_DIR$/GameManagerSvc" />
+            <option value="$PROJECT_DIR$/GameMessagingSvc" />
+            <option value="$PROJECT_DIR$/GameMonitoringSvc" />
+            <option value="$PROJECT_DIR$/GameNotificationSvc" />
+            <option value="$PROJECT_DIR$/GameScoreSvc" />
+            <option value="$PROJECT_DIR$/GameStartSvc" />
+            <option value="$PROJECT_DIR$/GameStateSvc" />
+            <option value="$PROJECT_DIR$/GameStopSvc" />
+            <option value="$PROJECT_DIR$/GameSubscriptionSvc" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

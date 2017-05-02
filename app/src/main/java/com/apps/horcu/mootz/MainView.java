@@ -91,6 +91,8 @@ public class MainView extends AppCompatActivity {
                 //hide the edit text. need to add an icon in the top bar or somewhere else
                 // that can bring it back to change the word if user changed mind
                 wEntryLinear.setVisibility(View.GONE);
+
+                letterGridUser.setVisibility(View.VISIBLE);
             }
         });
 
@@ -107,13 +109,12 @@ public class MainView extends AppCompatActivity {
                     for(int i = 0; i < currentWord.length(); i++){
                         UnHighlightTile(String.valueOf(currentWord.charAt(i)));
                     }
-
                     letterGridUser.setVisibility(View.INVISIBLE);
                     letterGrid.setVisibility(View.INVISIBLE);
                     return;
                 }
 
-                    letterGridUser.setVisibility(View.VISIBLE);
+
                     letterGrid.setVisibility(View.VISIBLE);
                 currentWord = s.toString();
             }

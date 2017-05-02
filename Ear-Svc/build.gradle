@@ -1,0 +1,56 @@
+// If you would like more information on the gradle-appengine-plugin please refer to the github page
+// https://github.com/GoogleCloudPlatform/gradle-appengine-plugin
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.42'
+    }
+}
+
+repositories {
+    jcenter();
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'appengine'
+
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
+
+dependencies {
+    appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.42'
+    compile 'com.google.appengine:appengine-endpoints:1.9.42'
+    compile 'com.google.appengine:appengine-endpoints-deps:1.9.42'
+    compile 'javax.servlet:servlet-api:2.5'
+    compile project(':GameArchiveSvc')
+    compile project(':GameAuthSvc')
+    compile project(':GameCleanupSvc')
+//    compile project(':GameCreatorSvc')
+//    compile project(':GameDestroyerSvc')
+//    compile project(':GameFriendsSvc')
+//    compile project(':GameLoggingSvc')
+//    compile project(':GameManagerSvc')
+//    compile project(':GameMessagingSvc')
+//    compile project(':GameMonitoringSvc')
+//    compile project(':GameNotificationSvc')
+//    compile project(':GameScoreSvc')
+//    compile project(':GameStartSvc')
+//    compile project(':GameStateSvc')
+//    compile project(':GameStopSvc')
+//    compile project(':GameSubscriptionSvc')
+}
+
+appengine {
+    downloadSdk = true
+    appcfg {
+        oauth2 = true
+    }
+    endpoints {
+        getClientLibsOnBuild = true
+        getDiscoveryDocsOnBuild = true
+    }
+}
