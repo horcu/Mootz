@@ -6,19 +6,18 @@
 
 package com.apps.horcu.mootz.authSvc;
 
-import com.example.models.ResponseBean;
+import com.apps.horcu.mootz.common.QueueMaster;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.taskqueue.TaskOptions;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +37,11 @@ import javax.inject.Named;
 )
 public class AuthEndpoint {
 
+    /** Firebase specific */
+    private FirebaseApp mootz = null;
+    private DatabaseReference mootzDb;
+
+
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
@@ -45,29 +49,16 @@ public class AuthEndpoint {
     public AuthBean sayNo(@Named("name") String name) {
         AuthBean response = new AuthBean();
 
-
-         /* This is for local testing only */
         try {
-            String param = "Jessica";
-            String url = "http://cleanupSvc.ballrz-7d916.appspot.com/_ah/api/cleanupApi/v1/sayClean/" + param;
-            boolean sent = sendRequest(url, new HashMap<String,Object>());
+            String url = "/cleanupApi/v1/sayClean";
+            boolean sent = QueueMaster.AddToDefaultQueue(url, "name", name);
 
-           response.setData(String.valueOf(sent));
+            response.setData(String.valueOf(sent));
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            response.setData(e.getMessage());
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             response.setData(e.getMessage());
         }
-
         return response;
-    }
-
-    private boolean sendRequest(String url, Map<String, Object> reqMap) throws IOException {
-        Queue queue = QueueFactory.getDefaultQueue();
-        queue.add(TaskOptions.Builder.withUrl(url));
-        return true;
     }
 }

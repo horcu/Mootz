@@ -41,7 +41,7 @@ dependencies {
     compile project(path: ':GameSubscriptionSvc', configuration: 'android-endpoints')
     compile project(path: ':GameFriendsSvc', configuration: 'android-endpoints')
     compile project(path: ':GameArchiveSvc', configuration: 'android-endpoints')
-    compile project(path: ':GameManagerSvc', configuration: 'android-endpoints')
+    compile project(path: ':DefaultSvc', configuration: 'android-endpoints')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-vector-drawable:25.3.1'

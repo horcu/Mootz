@@ -1,4 +1,4 @@
-package com.example.models;
+package com.apps.horcu.mootz.common;
 
 import java.util.Map;
 

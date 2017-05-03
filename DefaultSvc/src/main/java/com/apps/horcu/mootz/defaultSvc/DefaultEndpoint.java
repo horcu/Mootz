@@ -4,11 +4,13 @@
    https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/HelloEndpoints
 */
 
-package com.apps.horcu.mootz.managerSvc;
+package com.apps.horcu.mootz.defaultSvc;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
 
 import javax.inject.Named;
 
@@ -16,7 +18,7 @@ import javax.inject.Named;
  * An endpoint class we are exposing
  */
 @Api(
-        name = "managerApi",
+        name = "defaultApi",
         version = "v1",
         namespace = @ApiNamespace(
                 ownerDomain = "backend.myapplication.Horatio.example.com",
@@ -24,16 +26,22 @@ import javax.inject.Named;
                 packagePath = ""
         )
 )
-public class ManagerEndpoint {
+public class DefaultEndpoint {
+    /** Firebase specific */
+    private FirebaseApp mootz = null;
+    private DatabaseReference mootzDb;
+
 
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
-    @ApiMethod(name = "sayHi")
-    public MyBean sayHi(@Named("name") String name) {
+    @ApiMethod(name = "r")
+    public MyBean r(@Named("route") String route) {
         MyBean response = new MyBean();
-        response.setData("Hi, " + name);
 
+        //todo here we need to forward the traffic accordingly ????
+
+        response.setData(route);
         return response;
     }
 

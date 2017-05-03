@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/DefaultSvc" />
             <option value="$PROJECT_DIR$/Ear-Svc" />
             <option value="$PROJECT_DIR$/GameArchiveSvc" />
             <option value="$PROJECT_DIR$/GameAuthSvc" />
@@ -16,7 +17,6 @@
             <option value="$PROJECT_DIR$/GameDestroyerSvc" />
             <option value="$PROJECT_DIR$/GameFriendsSvc" />
             <option value="$PROJECT_DIR$/GameLoggingSvc" />
-            <option value="$PROJECT_DIR$/GameManagerSvc" />
             <option value="$PROJECT_DIR$/GameMessagingSvc" />
             <option value="$PROJECT_DIR$/GameMonitoringSvc" />
             <option value="$PROJECT_DIR$/GameNotificationSvc" />

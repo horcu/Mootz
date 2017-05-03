@@ -9,6 +9,8 @@ package com.apps.horcu.mootz.creatorSvc;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
 
 import javax.inject.Named;
 
@@ -25,6 +27,10 @@ import javax.inject.Named;
         )
 )
 public class CreatorEndpoint {
+
+    /** Firebase specific */
+    private FirebaseApp mootz = null;
+    private DatabaseReference mootzDb;
 
     /**
      * A simple endpoint method that takes a name and says Hi back

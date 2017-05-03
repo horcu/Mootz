@@ -6,11 +6,16 @@
 
 package com.apps.horcu.mootz.cleanupSvc;
 
-import com.example.models.ResponseBean;
+import com.apps.horcu.mootz.common.ResponseBean;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,17 +35,58 @@ import javax.inject.Named;
 )
 public class CleanupEndpoint {
 
+    /** Firebase specific */
+    private FirebaseApp mootz = null;
+    private DatabaseReference mootzDb;
+
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
     @ApiMethod(name = "sayClean")
     public ResponseBean sayClean(@Named("name") String name) {
+
+        //set up the response object
         ResponseBean response = new ResponseBean();
 
+        //check if the connection is good and make a new one if its necessary
+        if (mootz == null) {
+            if (!InitFirebase()) {
+                return response;
+            }
+        }
+
+        //get the reference for this service in the db
+        mootzDb = FirebaseDatabase
+                .getInstance(mootz)
+                .getReference()
+                .child("cleanup")
+                .getRef();
+
         Map<String,Object> map = new HashMap<>();
-        map.put("message","Welcome to the cleanup micro-service , " + name);
+        map.put("message","The cleanup micro-service , " + name);
+        mootzDb.push().setValue(map);
+
+
         response.setData(map);
         return response;
     }
 
+
+    private boolean InitFirebase() {
+        FirebaseOptions options;
+        boolean result = true;
+        try {
+            options = new FirebaseOptions.Builder()
+                    .setServiceAccount(new FileInputStream("service-account.json"))
+                    .setDatabaseUrl("https://mootz-166219.firebaseio.com/")
+                    .build();
+
+            mootz = FirebaseApp.initializeApp(options);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            result =  false;
+        }
+        return result;
+    }
 }

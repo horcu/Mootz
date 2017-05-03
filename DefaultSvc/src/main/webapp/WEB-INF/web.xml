@@ -5,7 +5,7 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value>com.apps.horcu.mootz.managerSvc.ManagerEndpoint</param-value>
+            <param-value>com.apps.horcu.mootz.defaultSvc.DefaultEndpoint</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

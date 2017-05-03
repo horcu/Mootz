@@ -11,7 +11,7 @@
                 com.apps.horcu.mootz.authSvc.AuthEndpoint,
                 com.apps.horcu.mootz.destroyerSvc.DestroyerEndpoint,
                 com.apps.horcu.mootz.creatorSvc.CreatorEndpoint,
-                com.apps.horcu.mootz.managerSvc.ManagerEndpoint
+                com.apps.horcu.mootz.defaultSvc.DefaultEndpoint
 
             </param-value>
         </init-param>

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/DefaultSvc/DefaultSvc.iml" filepath="$PROJECT_DIR$/DefaultSvc/DefaultSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/Ear-Svc/Ear-Svc.iml" filepath="$PROJECT_DIR$/Ear-Svc/Ear-Svc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameArchiveSvc/GameArchiveSvc.iml" filepath="$PROJECT_DIR$/GameArchiveSvc/GameArchiveSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameAuthSvc/GameAuthSvc.iml" filepath="$PROJECT_DIR$/GameAuthSvc/GameAuthSvc.iml" />
@@ -10,7 +11,6 @@
       <module fileurl="file://$PROJECT_DIR$/GameDestroyerSvc/GameDestroyerSvc.iml" filepath="$PROJECT_DIR$/GameDestroyerSvc/GameDestroyerSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameFriendsSvc/GameFriendsSvc.iml" filepath="$PROJECT_DIR$/GameFriendsSvc/GameFriendsSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameLoggingSvc/GameLoggingSvc.iml" filepath="$PROJECT_DIR$/GameLoggingSvc/GameLoggingSvc.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GameManagerSvc/GameManagerSvc.iml" filepath="$PROJECT_DIR$/GameManagerSvc/GameManagerSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameMessagingSvc/GameMessagingSvc.iml" filepath="$PROJECT_DIR$/GameMessagingSvc/GameMessagingSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameMonitoringSvc/GameMonitoringSvc.iml" filepath="$PROJECT_DIR$/GameMonitoringSvc/GameMonitoringSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameNotificationSvc/GameNotificationSvc.iml" filepath="$PROJECT_DIR$/GameNotificationSvc/GameNotificationSvc.iml" />

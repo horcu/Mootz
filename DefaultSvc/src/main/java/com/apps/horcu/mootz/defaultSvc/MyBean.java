@@ -1,4 +1,4 @@
-package com.apps.horcu.mootz.managerSvc;
+package com.apps.horcu.mootz.defaultSvc;
 
 /**
  * The object model for the data we are sending through endpoints
