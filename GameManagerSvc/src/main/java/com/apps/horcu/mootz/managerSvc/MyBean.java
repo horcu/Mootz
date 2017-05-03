@@ -1,4 +1,4 @@
-package com.example.Horatio.myapplication.backend;
+package com.apps.horcu.mootz.managerSvc;
 
 /**
  * The object model for the data we are sending through endpoints

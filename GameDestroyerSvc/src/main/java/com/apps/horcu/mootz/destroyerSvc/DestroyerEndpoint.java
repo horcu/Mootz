@@ -31,10 +31,12 @@ public class DestroyerEndpoint {
      */
     @ApiMethod(name = "destroyer")
     public MyBean destroyer(@Named("name") String name) {
+
         MyBean response = new MyBean();
         response.setData("Destroy , " + name);
 
         return response;
     }
+
 
 }

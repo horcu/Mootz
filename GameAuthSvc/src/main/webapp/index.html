@@ -90,7 +90,7 @@
     function enableClick() {
       document.getElementById('helloButton').onclick = function() {
         var name = document.getElementById('nameInput').value;
-        gapi.client.myApi.sayHi({'name': name}).execute(
+        gapi.client.authApi.sayNo({'name': name}).execute(
           function(response) {
             var outputAlertDiv = document.getElementById('outputAlert');
             outputAlertDiv.style.visibility = 'visible';
@@ -110,7 +110,7 @@
     }
     // This is called initially
     function init() {
-      var apiName = 'myApi';
+      var apiName = 'authApi';
       var apiVersion = 'v1';
       var apiRoot = 'https://' + window.location.host + '/_ah/api';
       if (window.location.hostname == 'localhost'

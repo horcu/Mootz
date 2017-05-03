@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/GameStopSvc" />
             <option value="$PROJECT_DIR$/GameSubscriptionSvc" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/common" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

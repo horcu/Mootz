@@ -21,6 +21,7 @@
       <module fileurl="file://$PROJECT_DIR$/GameSubscriptionSvc/GameSubscriptionSvc.iml" filepath="$PROJECT_DIR$/GameSubscriptionSvc/GameSubscriptionSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/Mootz.iml" filepath="$PROJECT_DIR$/Mootz.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
     </modules>
   </component>
 </project>
