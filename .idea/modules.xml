@@ -3,24 +3,44 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DefaultSvc/DefaultSvc.iml" filepath="$PROJECT_DIR$/DefaultSvc/DefaultSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DefaultSvc/DefaultSvc.iml" filepath="$PROJECT_DIR$/DefaultSvc/DefaultSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ear-Svc/Ear-Svc.iml" filepath="$PROJECT_DIR$/Ear-Svc/Ear-Svc.iml" />
       <module fileurl="file://$PROJECT_DIR$/Ear-Svc/Ear-Svc.iml" filepath="$PROJECT_DIR$/Ear-Svc/Ear-Svc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameArchiveSvc/GameArchiveSvc.iml" filepath="$PROJECT_DIR$/GameArchiveSvc/GameArchiveSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameArchiveSvc/GameArchiveSvc.iml" filepath="$PROJECT_DIR$/GameArchiveSvc/GameArchiveSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameAuthSvc/GameAuthSvc.iml" filepath="$PROJECT_DIR$/GameAuthSvc/GameAuthSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameAuthSvc/GameAuthSvc.iml" filepath="$PROJECT_DIR$/GameAuthSvc/GameAuthSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameCleanupSvc/GameCleanupSvc.iml" filepath="$PROJECT_DIR$/GameCleanupSvc/GameCleanupSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameCleanupSvc/GameCleanupSvc.iml" filepath="$PROJECT_DIR$/GameCleanupSvc/GameCleanupSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameCreatorSvc/GameCreatorSvc.iml" filepath="$PROJECT_DIR$/GameCreatorSvc/GameCreatorSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameCreatorSvc/GameCreatorSvc.iml" filepath="$PROJECT_DIR$/GameCreatorSvc/GameCreatorSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameDestroyerSvc/GameDestroyerSvc.iml" filepath="$PROJECT_DIR$/GameDestroyerSvc/GameDestroyerSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameDestroyerSvc/GameDestroyerSvc.iml" filepath="$PROJECT_DIR$/GameDestroyerSvc/GameDestroyerSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameFriendsSvc/GameFriendsSvc.iml" filepath="$PROJECT_DIR$/GameFriendsSvc/GameFriendsSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameFriendsSvc/GameFriendsSvc.iml" filepath="$PROJECT_DIR$/GameFriendsSvc/GameFriendsSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameLoggingSvc/GameLoggingSvc.iml" filepath="$PROJECT_DIR$/GameLoggingSvc/GameLoggingSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameLoggingSvc/GameLoggingSvc.iml" filepath="$PROJECT_DIR$/GameLoggingSvc/GameLoggingSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameMessagingSvc/GameMessagingSvc.iml" filepath="$PROJECT_DIR$/GameMessagingSvc/GameMessagingSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameMessagingSvc/GameMessagingSvc.iml" filepath="$PROJECT_DIR$/GameMessagingSvc/GameMessagingSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameMonitoringSvc/GameMonitoringSvc.iml" filepath="$PROJECT_DIR$/GameMonitoringSvc/GameMonitoringSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameMonitoringSvc/GameMonitoringSvc.iml" filepath="$PROJECT_DIR$/GameMonitoringSvc/GameMonitoringSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameNotificationSvc/GameNotificationSvc.iml" filepath="$PROJECT_DIR$/GameNotificationSvc/GameNotificationSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameNotificationSvc/GameNotificationSvc.iml" filepath="$PROJECT_DIR$/GameNotificationSvc/GameNotificationSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameScoreSvc/GameScoreSvc.iml" filepath="$PROJECT_DIR$/GameScoreSvc/GameScoreSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameScoreSvc/GameScoreSvc.iml" filepath="$PROJECT_DIR$/GameScoreSvc/GameScoreSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameStartSvc/GameStartSvc.iml" filepath="$PROJECT_DIR$/GameStartSvc/GameStartSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameStartSvc/GameStartSvc.iml" filepath="$PROJECT_DIR$/GameStartSvc/GameStartSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameStateSvc/GameStateSvc.iml" filepath="$PROJECT_DIR$/GameStateSvc/GameStateSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameStateSvc/GameStateSvc.iml" filepath="$PROJECT_DIR$/GameStateSvc/GameStateSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameStopSvc/GameStopSvc.iml" filepath="$PROJECT_DIR$/GameStopSvc/GameStopSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameStopSvc/GameStopSvc.iml" filepath="$PROJECT_DIR$/GameStopSvc/GameStopSvc.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameSubscriptionSvc/GameSubscriptionSvc.iml" filepath="$PROJECT_DIR$/GameSubscriptionSvc/GameSubscriptionSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameSubscriptionSvc/GameSubscriptionSvc.iml" filepath="$PROJECT_DIR$/GameSubscriptionSvc/GameSubscriptionSvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mootz.iml" filepath="$PROJECT_DIR$/Mootz.iml" />
       <module fileurl="file://$PROJECT_DIR$/Mootz.iml" filepath="$PROJECT_DIR$/Mootz.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
     </modules>
   </component>

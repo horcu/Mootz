@@ -6,7 +6,6 @@
 
 package com.apps.horcu.mootz.authSvc;
 
-import com.apps.horcu.mootz.common.QueueMaster;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
@@ -15,11 +14,6 @@ import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.taskqueue.TaskOptions;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Named;
 
@@ -41,7 +35,6 @@ public class AuthEndpoint {
     private FirebaseApp mootz = null;
     private DatabaseReference mootzDb;
 
-
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
@@ -50,8 +43,10 @@ public class AuthEndpoint {
         AuthBean response = new AuthBean();
 
         try {
-            String url = "/cleanupApi/v1/sayClean";
-            boolean sent = QueueMaster.AddToDefaultQueue(url, "name", name);
+
+            //create the task add to queue
+            String url = "/cleanupApi/v1/sayClean/";
+            boolean sent = AddToQueue("cleanup-queue", url, "name", name);
 
             response.setData(String.valueOf(sent));
 
@@ -60,5 +55,20 @@ public class AuthEndpoint {
             response.setData(e.getMessage());
         }
         return response;
+    }
+
+    private boolean AddToQueue(String queueName, String urlPath, String key ,String val){
+
+        boolean result = false;
+        try {
+            Queue queue = QueueFactory.getQueue(queueName);
+            queue.add(TaskOptions.Builder.withUrl(urlPath)
+                    .param(key,val));
+
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

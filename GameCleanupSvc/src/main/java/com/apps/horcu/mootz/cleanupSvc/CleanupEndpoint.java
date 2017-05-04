@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.FileInputStream;
+import java.io.PipedOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,36 +39,54 @@ public class CleanupEndpoint {
     /** Firebase specific */
     private FirebaseApp mootz = null;
     private DatabaseReference mootzDb;
-
+    private static final String CLEANUPQUEUE = "cleanupQueue";
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
-    @ApiMethod(name = "sayClean")
+    @ApiMethod(name = "sayClean", httpMethod = "POST")
     public ResponseBean sayClean(@Named("name") String name) {
 
-        //set up the response object
         ResponseBean response = new ResponseBean();
+        try {
+            //set up the response object
 
-        //check if the connection is good and make a new one if its necessary
-        if (mootz == null) {
-            if (!InitFirebase()) {
-                return response;
+
+            //check if the connection is good and make a new one if its necessary
+            if (mootz == null) {
+                if (!InitFirebase()) {
+                    return response;
+                }
             }
+
+            //get the reference for this service in the db
+            mootzDb = FirebaseDatabase
+                    .getInstance(mootz)
+                    .getReference()
+                    .child("cleanup")
+                    .getRef();
+
+            Map<String,Object> map = new HashMap<>();
+            map.put("message","The cleanup micro-service , " + name);
+            mootzDb.push().setValue(map);
+
+
+            response.setData(map);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            FirebaseDatabase
+                    .getInstance(mootz)
+                    .getReference()
+                    .child("errors")
+                    .getRef()
+            .push()
+            .setValue(e.getMessage());
+
+            Map<String,Object> map = new HashMap<>();
+            map.put("message",e.getMessage());
+
+            response.setData(map);
         }
-
-        //get the reference for this service in the db
-        mootzDb = FirebaseDatabase
-                .getInstance(mootz)
-                .getReference()
-                .child("cleanup")
-                .getRef();
-
-        Map<String,Object> map = new HashMap<>();
-        map.put("message","The cleanup micro-service , " + name);
-        mootzDb.push().setValue(map);
-
-
-        response.setData(map);
         return response;
     }
 
