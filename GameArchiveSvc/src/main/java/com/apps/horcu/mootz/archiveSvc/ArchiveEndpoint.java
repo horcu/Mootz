@@ -35,10 +35,10 @@ public class ArchiveEndpoint {
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
-    @ApiMethod(name = "sayHi")
+    @ApiMethod(name = "sayHo")
     public ArchiveBean sayHi(@Named("name") String name) {
         ArchiveBean response = new ArchiveBean();
-        response.setData("Hi, " + name);
+        response.setData("Ho, " + name);
 
         return response;
     }

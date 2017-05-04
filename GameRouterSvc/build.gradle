@@ -23,11 +23,8 @@ targetCompatibility = JavaVersion.VERSION_1_7
 
 dependencies {
     appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.42'
-    compile 'com.google.appengine:appengine-endpoints:1.9.42'
-    compile 'com.google.appengine:appengine-endpoints-deps:1.9.42'
     compile 'javax.servlet:servlet-api:2.5'
     compile 'com.google.firebase:firebase-server-sdk:3.0.1'
-    compile project(path: ':common')
 }
 
 appengine {
@@ -35,13 +32,4 @@ appengine {
     appcfg {
         oauth2 = true
     }
-    endpoints {
-        getClientLibsOnBuild = true
-        getDiscoveryDocsOnBuild = true
-    }
-
-    apply plugin: 'jetty'
-
-    httpPort = 9000
-
 }

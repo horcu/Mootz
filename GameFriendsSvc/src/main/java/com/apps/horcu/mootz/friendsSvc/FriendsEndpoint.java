@@ -4,7 +4,7 @@
    https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/HelloEndpoints
 */
 
-package com.example.Horatio.myapplication.backend;
+package com.apps.horcu.mootz.friendsSvc;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -24,7 +24,7 @@ import javax.inject.Named;
                 packagePath = ""
         )
 )
-public class MyEndpoint {
+public class FriendsEndpoint {
 
     /**
      * A simple endpoint method that takes a name and says Hi back

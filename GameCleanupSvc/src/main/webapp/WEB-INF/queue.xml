@@ -1,12 +1,7 @@
 <queue-entries>
     <queue>
         <name>cleanup-queue</name>
+        <target>v1.cleanupsvc</target>
         <rate>5/s</rate>
-        <retry-parameters>
-            <task-retry-limit>4</task-retry-limit>
-            <min-backoff-seconds>10</min-backoff-seconds>
-            <max-backoff-seconds>200</max-backoff-seconds>
-            <task-age-limit>1d</task-age-limit>
-        </retry-parameters>
     </queue>
 </queue-entries>

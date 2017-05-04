@@ -43,13 +43,12 @@ public class CleanupEndpoint {
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
-    @ApiMethod(name = "sayClean", httpMethod = "POST")
+    @ApiMethod(name = "sayClean")
     public ResponseBean sayClean(@Named("name") String name) {
 
         ResponseBean response = new ResponseBean();
         try {
             //set up the response object
-
 
             //check if the connection is good and make a new one if its necessary
             if (mootz == null) {

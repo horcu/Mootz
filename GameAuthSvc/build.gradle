@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.42'
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.51'
     }
 }
 
@@ -39,4 +39,8 @@ appengine {
         getClientLibsOnBuild = true
         getDiscoveryDocsOnBuild = true
     }
+
+    apply plugin: 'jetty'
+
+    httpPort = 9001
 }

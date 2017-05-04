@@ -15,6 +15,8 @@ import com.google.appengine.api.taskqueue.TaskOptions;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.Date;
+
 import javax.inject.Named;
 
 /**
@@ -31,7 +33,9 @@ import javax.inject.Named;
 )
 public class AuthEndpoint {
 
-    /** Firebase specific */
+    /**
+     * Firebase specific
+     */
     private FirebaseApp mootz = null;
     private DatabaseReference mootzDb;
 
@@ -45,8 +49,7 @@ public class AuthEndpoint {
         try {
 
             //create the task add to queue
-            String url = "/cleanupApi/v1/sayClean/";
-            boolean sent = AddToQueue("cleanup-queue", url, "name", name);
+            String sent = AddToQueue("cleanupTask", "cleanup-queue", "/sayClean", "name", name);
 
             response.setData(String.valueOf(sent));
 
@@ -57,17 +60,20 @@ public class AuthEndpoint {
         return response;
     }
 
-    private boolean AddToQueue(String queueName, String urlPath, String key ,String val){
+    private String AddToQueue(String taskName, String queueName, String urlPath, String key, String val) {
 
-        boolean result = false;
+        String result = "false";
+        String tName = String.valueOf(new Date().getTime()) + "_" + taskName;
         try {
             Queue queue = QueueFactory.getQueue(queueName);
-            queue.add(TaskOptions.Builder.withUrl(urlPath)
-                    .param(key,val));
+            queue.add(TaskOptions.Builder.withUrl(urlPath).method(TaskOptions.Method.POST)
+                  //  .param(key,val)
+            .taskName(tName));
 
-            result = true;
+            result = "true";
         } catch (Exception e) {
             e.printStackTrace();
+            result = e.getMessage();
         }
         return result;
     }

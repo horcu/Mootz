@@ -13,6 +13,16 @@
         <url-pattern>/_ah/spi/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CleanupServlet</servlet-name>
+        <servlet-class>com.apps.horcu.mootz.cleanupSvc.CleanupServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CleanupServlet</servlet-name>
+        <url-pattern>/sayClean</url-pattern>
+    </servlet-mapping>
+
+
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
