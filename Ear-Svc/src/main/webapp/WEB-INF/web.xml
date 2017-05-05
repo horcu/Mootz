@@ -6,7 +6,6 @@
         <init-param>
             <param-name>services</param-name>
             <param-value>
-                <!--com.apps.horcu.mootz.archiveSvc.ArchiveEndpoint,-->
                 com.apps.horcu.mootz.cleanupSvc.CleanupEndpoint,
                 com.apps.horcu.mootz.authSvc.AuthEndpoint,
                 com.apps.horcu.mootz.destroyerSvc.DestroyerEndpoint,

@@ -9,6 +9,14 @@ package com.apps.horcu.mootz.destroyerSvc;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.FileInputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Named;
 
@@ -26,6 +34,10 @@ import javax.inject.Named;
 )
 public class DestroyerEndpoint {
 
+    /** Firebase specific */
+    private FirebaseApp mootz = null;
+    private DatabaseReference mootzDb;
+
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
@@ -33,10 +45,64 @@ public class DestroyerEndpoint {
     public MyBean destroyer(@Named("name") String name) {
 
         MyBean response = new MyBean();
-        response.setData("Destroy , " + name);
+        try {
 
+            //check if the connection is good and make a new one if its necessary
+            if (mootz == null) {
+                if (!InitFirebase()) {
+                    return response;
+                }
+            }
+
+            //get the reference for this service in the db
+            mootzDb = FirebaseDatabase
+                    .getInstance(mootz)
+                    .getReference()
+                    .child("destroyer")
+                    .getRef();
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("message", "The destroyer micro-service , " + name);
+            mootzDb.push().setValue(map);
+
+
+            response.setData(map);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            FirebaseDatabase
+                    .getInstance(mootz)
+                    .getReference()
+                    .child("errors")
+                    .getRef()
+                    .push()
+                    .setValue(e.getMessage());
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("message", e.getMessage());
+
+            response.setData(map);
+
+
+        }
         return response;
     }
 
+    private boolean InitFirebase() {
+        FirebaseOptions options;
+        boolean result = true;
+        try {
+            options = new FirebaseOptions.Builder()
+                    .setServiceAccount(new FileInputStream("service-account.json"))
+                    .setDatabaseUrl("https://mootz-166219.firebaseio.com/")
+                    .build();
 
+            mootz = FirebaseApp.initializeApp(options);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            result =  false;
+        }
+        return result;
+    }
 }

@@ -12,6 +12,14 @@
         <servlet-name>SystemServiceServlet</servlet-name>
         <url-pattern>/_ah/spi/*</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>CreatorServlet</servlet-name>
+        <servlet-class>com.apps.horcu.mootz.creatorSvc.CreatorServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreatorServlet</servlet-name>
+        <url-pattern>/creator</url-pattern>
+    </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

@@ -6,14 +6,13 @@
 
 package com.apps.horcu.mootz.defaultSvc;
 
-import com.apps.horcu.mootz.common.IQueueService;
+import com.apps.horcu.mootz.common.Conductor;
+import com.apps.horcu.mootz.common.ServiceTask;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
-
-import java.util.Map;
 
 import javax.inject.Named;
 
@@ -30,28 +29,43 @@ import javax.inject.Named;
         )
 )
 public class DefaultEndpoint {
-    /** Firebase specific */
+    /**
+     * Firebase specific
+     */
     private FirebaseApp mootz = null;
     private DatabaseReference mootzDb;
-
+    private Conductor conductor = null;
 
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
     @ApiMethod(name = "r")
-    public MyBean r(@Named("route") String route) {
-        MyBean response = new MyBean();
+    public DefaultBean r(@Named("route") String route) {
+        DefaultBean response = new DefaultBean();
+        ServiceTask serviceTask = null;
+        try {
+            //init
+            if (conductor == null) {
+                conductor = new Conductor();
+            }
 
-        //todo here we need to forward the traffic accordingly ????
+            //get service task object
+            serviceTask = conductor.getTaskForRoute(route);
 
-        response.setData(route);
+            //make sure the path exists
+            if (serviceTask == null) {
+                response.setError("path not found");
+                return response;
+            }
+
+            //authenticate the request and dispath it to the proper queue
+            conductor.AuthenticateAndDispath(serviceTask);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        response.setData(serviceTask);
         return response;
-    }
-
-
-    public String AddToQueue(String taskName, String queueName, String urlPath, Map<String, String> paramsMap) {
-
-        return "";
-
     }
 }

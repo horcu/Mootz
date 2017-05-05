@@ -1,0 +1,22 @@
+<queue-entries>
+    <queue>
+        <name>auth-queue</name>
+        <target>v1.authsvc</target>
+        <rate>5/s</rate>
+    </queue>
+    <queue>
+        <name>cleanup-queue</name>
+        <target>v1.cleanupsvc</target>
+        <rate>5/s</rate>
+    </queue>
+    <queue>
+        <name>creator-queue</name>
+        <target>v1.creatorsvc</target>
+        <rate>5/s</rate>
+    </queue>
+    <queue>
+        <name>destroyer-queue</name>
+        <target>v1.destroyersvc</target>
+        <rate>5/s</rate>
+    </queue>
+</queue-entries>

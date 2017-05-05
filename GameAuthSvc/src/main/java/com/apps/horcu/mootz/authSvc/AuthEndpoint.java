@@ -6,18 +6,22 @@
 
 package com.apps.horcu.mootz.authSvc;
 
+import com.apps.horcu.mootz.common.Conductor;
 import com.apps.horcu.mootz.common.IQueueService;
+import com.apps.horcu.mootz.common.ServiceTask;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.taskqueue.TaskOptions;
+import com.google.appengine.repackaged.com.google.gson.Gson;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.inject.Named;
 
@@ -40,20 +44,41 @@ public class AuthEndpoint {
      */
     private FirebaseApp mootz = null;
     private DatabaseReference mootzDb;
+    Conductor conductor = null;
 
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
-    @ApiMethod(name = "sayNo")
-    public AuthBean sayNo(@Named("name") String name) {
+    @ApiMethod(name = "a")
+    public AuthBean a(@Named("serviceTask")String serviceTask) {
+
+        ServiceTask sTask = new Gson().fromJson(serviceTask, ServiceTask.class);
+        //create the response bean
         AuthBean response = new AuthBean();
 
         try {
 
-            //create the task add to queue
-            String sent = AddToQueue("cleanupTask", "cleanup-queue", "/sayClean", null);
+        //auth the service call first
+        if (!auth(sTask.getUserId())) {
+            response.setError("bad token");
+            return response;
+        }
 
-            response.setData(String.valueOf(sent));
+        //set auth to true
+        sTask.setIsAuthenticated(true);
+
+            //set the auth token
+        sTask.setToken(UUID.randomUUID() + "_" + String.valueOf(new Date().getTime()));
+
+        //make sure the conductor isn't null
+            if (conductor == null)
+                conductor = new Conductor();
+
+            //create the cleanup task add to queue
+            boolean jobDone = conductor.AddToQueue(sTask);
+
+            //set the response data
+            response.setData(String.valueOf(jobDone));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,31 +87,9 @@ public class AuthEndpoint {
         return response;
     }
 
-    private String AddToQueue(String taskName, String queueName, String urlPath, Map<String , String> paramsMap) {
-
-        String result;
-
-        String tName = String.valueOf(new Date().getTime()) + "_" + taskName;
-        try {
-            Queue queue = QueueFactory.getQueue(queueName);
-            queue.add(TaskOptions.Builder.withUrl(urlPath)
-                    .method(TaskOptions.Method.POST)
-                    .taskName(tName));
-
-            if(paramsMap!= null) {
-                for (int i = 0; i < paramsMap.keySet().size(); i++) {
-                    String key = String.valueOf(paramsMap.keySet().toArray()[i]);
-                    String value = String.valueOf(paramsMap.entrySet().toArray()[i]);
-
-                    queue.add(TaskOptions.Builder.withParam(key, value));
-                }
-            }
-
-            result = "true";
-        } catch (Exception e) {
-            e.printStackTrace();
-            result = e.getMessage();
-        }
-        return result;
+    private boolean auth(String token) {
+        return true;
     }
+
+
 }

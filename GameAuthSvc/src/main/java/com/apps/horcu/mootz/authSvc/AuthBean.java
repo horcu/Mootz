@@ -5,6 +5,7 @@ package com.apps.horcu.mootz.authSvc;
  */
 public class AuthBean {
 
+    private String error;
     private String myData;
 
     public String getData() {
@@ -13,5 +14,13 @@ public class AuthBean {
 
     public void setData(String data) {
         myData = data;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }
