@@ -6,11 +6,14 @@
 
 package com.apps.horcu.mootz.defaultSvc;
 
+import com.apps.horcu.mootz.common.IQueueService;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
+
+import java.util.Map;
 
 import javax.inject.Named;
 
@@ -45,4 +48,10 @@ public class DefaultEndpoint {
         return response;
     }
 
+
+    public String AddToQueue(String taskName, String queueName, String urlPath, Map<String, String> paramsMap) {
+
+        return "";
+
+    }
 }

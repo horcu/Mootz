@@ -11,12 +11,20 @@ import java.io.IOException;
 import javax.servlet.http.*;
 
 public class CleanupServlet extends HttpServlet {
+
+    CleanupEndpoint cEp = null;
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         resp.setContentType("text/plain");
         resp.getWriter().println("Please use the form to POST to this url");
 
+        if(cEp == null){
+            cEp = new CleanupEndpoint();
+        }
+
+        cEp.sayClean("Getter");
     }
 
     @Override
@@ -28,7 +36,11 @@ public class CleanupServlet extends HttpServlet {
             resp.getWriter().println("Please enter a name");
         }
 
-        new CleanupEndpoint().sayClean(name);
+        if(cEp == null){
+            cEp = new CleanupEndpoint();
+        }
+
+        cEp.sayClean("Getter");
         resp.getWriter().println(name + " :now calling Cleanup endpoint"); resp.getWriter().println("Hello " + name);
 
 

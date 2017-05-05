@@ -40,9 +40,11 @@ public class CleanupEndpoint {
     private FirebaseApp mootz = null;
     private DatabaseReference mootzDb;
     private static final String CLEANUPQUEUE = "cleanupQueue";
+
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
+
     @ApiMethod(name = "sayClean")
     public ResponseBean sayClean(@Named("name") String name) {
 

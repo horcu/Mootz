@@ -6,6 +6,7 @@
 
 package com.apps.horcu.mootz.authSvc;
 
+import com.apps.horcu.mootz.common.IQueueService;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
@@ -16,6 +17,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.inject.Named;
 
@@ -49,7 +51,7 @@ public class AuthEndpoint {
         try {
 
             //create the task add to queue
-            String sent = AddToQueue("cleanupTask", "cleanup-queue", "/sayClean", "name", name);
+            String sent = AddToQueue("cleanupTask", "cleanup-queue", "/sayClean", null);
 
             response.setData(String.valueOf(sent));
 
@@ -60,15 +62,25 @@ public class AuthEndpoint {
         return response;
     }
 
-    private String AddToQueue(String taskName, String queueName, String urlPath, String key, String val) {
+    private String AddToQueue(String taskName, String queueName, String urlPath, Map<String , String> paramsMap) {
 
-        String result = "false";
+        String result;
+
         String tName = String.valueOf(new Date().getTime()) + "_" + taskName;
         try {
             Queue queue = QueueFactory.getQueue(queueName);
-            queue.add(TaskOptions.Builder.withUrl(urlPath).method(TaskOptions.Method.POST)
-                  //  .param(key,val)
-            .taskName(tName));
+            queue.add(TaskOptions.Builder.withUrl(urlPath)
+                    .method(TaskOptions.Method.POST)
+                    .taskName(tName));
+
+            if(paramsMap!= null) {
+                for (int i = 0; i < paramsMap.keySet().size(); i++) {
+                    String key = String.valueOf(paramsMap.keySet().toArray()[i]);
+                    String value = String.valueOf(paramsMap.entrySet().toArray()[i]);
+
+                    queue.add(TaskOptions.Builder.withParam(key, value));
+                }
+            }
 
             result = "true";
         } catch (Exception e) {

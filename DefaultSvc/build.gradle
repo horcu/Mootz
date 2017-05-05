@@ -27,6 +27,7 @@ dependencies {
     compile 'com.google.appengine:appengine-endpoints-deps:1.9.42'
     compile 'com.google.firebase:firebase-server-sdk:3.0.1'
     compile 'javax.servlet:servlet-api:2.5'
+    compile project(path: ':common')
 }
 
 appengine {
