@@ -18,7 +18,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>DestroyerServlet</servlet-name>
-        <url-pattern>/destroyer</url-pattern>
+        <url-pattern>/destroy</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>

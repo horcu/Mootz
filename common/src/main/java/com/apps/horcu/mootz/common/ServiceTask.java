@@ -1,5 +1,6 @@
 package com.apps.horcu.mootz.common;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -10,16 +11,15 @@ public class ServiceTask {
     private String taskName;
     private String taskUrl;
     private String queueName;
-    private Map<String,Object> params;
+//    private HashMap<String,String> params;
     private String token;
     private boolean isAuthenticated;
     private String userId;
 
-    ServiceTask(String taskName, String taskUrl, String queueName, Map<String, Object> params, String token, String userId) {
+    ServiceTask(String taskName, String taskUrl, String queueName, String token, String userId) {
         this.taskName = taskName;
         this.taskUrl = taskUrl;
         this.queueName = queueName;
-        this.params = params;
         this.token = token;
         this.userId = userId;
     }
@@ -50,14 +50,6 @@ public class ServiceTask {
 
     public void setQueueName(String queueName) {
         this.queueName = queueName;
-    }
-
-    public Map<String, Object> getParams() {
-        return params;
-    }
-
-    public void setParams(Map<String, Object> params) {
-        this.params = params;
     }
 
     public String getToken() {

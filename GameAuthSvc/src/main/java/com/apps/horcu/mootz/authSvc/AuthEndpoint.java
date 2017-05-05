@@ -16,8 +16,10 @@ import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.taskqueue.TaskOptions;
 import com.google.appengine.repackaged.com.google.gson.Gson;
+import com.google.appengine.repackaged.com.google.gson.internal.Excluder;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
+import com.google.gson.JsonSyntaxException;
 
 import java.util.Date;
 import java.util.Map;
@@ -52,11 +54,14 @@ public class AuthEndpoint {
     @ApiMethod(name = "a")
     public AuthBean a(@Named("serviceTask")String serviceTask) {
 
-        ServiceTask sTask = new Gson().fromJson(serviceTask, ServiceTask.class);
+
         //create the response bean
         AuthBean response = new AuthBean();
-
+        ServiceTask sTask = null;
         try {
+
+            //deserialize the string
+             sTask = new Gson().fromJson(serviceTask, ServiceTask.class);
 
         //auth the service call first
         if (!auth(sTask.getUserId())) {
@@ -75,14 +80,20 @@ public class AuthEndpoint {
                 conductor = new Conductor();
 
             //create the cleanup task add to queue
-            boolean jobDone = conductor.AddToQueue(sTask);
+           if(conductor.AddToQueue(sTask))
+            response.setData(sTask);
+            else {
+               response.setError("could not add" +  sTask.getTaskName()  + "serviceTask to " + sTask.getQueueName());
+           }
 
-            //set the response data
-            response.setData(String.valueOf(jobDone));
+        }
+        catch (IllegalStateException | JsonSyntaxException exception) {
+            response.setError(exception.getMessage());
 
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
-            response.setData(e.getMessage());
+            response.setData(sTask);
         }
         return response;
     }

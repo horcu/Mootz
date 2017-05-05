@@ -19,32 +19,37 @@ public class AuthServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
+        String serviceTask = req.getParameter("serviceTask");
         resp.setContentType("text/plain");
+
         resp.getWriter().println("Please use the form to POST to this url");
 
         if(cEp == null){
             cEp = new AuthEndpoint();
         }
 
-        cEp.a("Getter");
+        cEp.a(serviceTask);
     }
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-        String name = req.getParameter("name");
+        String serviceTask = req.getParameter("serviceTask");
         resp.setContentType("text/plain");
-        if (name == null) {
+        if (serviceTask == null) {
             resp.getWriter().println("Please enter a name");
+            return;
         }
 
         if(cEp == null){
             cEp = new AuthEndpoint();
         }
 
-        cEp.a("Getter");
-        resp.getWriter().println(name + " :now calling a endpoint"); resp.getWriter().println("Hello " + name);
+        AuthBean aStatus =  cEp.a(serviceTask);
 
-
+        if(!aStatus.getError().equals(""))
+        resp.getWriter().println(aStatus.getError());
+        else
+            resp.getWriter().println(aStatus.getData().getTaskName() + " has completed");
     }
 }

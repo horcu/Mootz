@@ -24,7 +24,7 @@ public class CleanupServlet extends HttpServlet {
             cEp = new CleanupEndpoint();
         }
 
-        cEp.sayClean("Getter");
+        cEp.clean("Getter");
     }
 
     @Override
@@ -40,7 +40,7 @@ public class CleanupServlet extends HttpServlet {
             cEp = new CleanupEndpoint();
         }
 
-        cEp.sayClean("Getter");
+        cEp.clean("Getter");
         resp.getWriter().println(name + " :now calling Cleanup endpoint"); resp.getWriter().println("Hello " + name);
 
     }

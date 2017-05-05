@@ -45,8 +45,8 @@ public class CleanupEndpoint {
      * A simple endpoint method that takes a name and says Hi back
      */
 
-    @ApiMethod(name = "sayClean")
-    public ResponseBean sayClean(@Named("name") String name) {
+    @ApiMethod(name = "clean")
+    public ResponseBean clean(@Named("name") String name) {
 
         ResponseBean response = new ResponseBean();
         try {

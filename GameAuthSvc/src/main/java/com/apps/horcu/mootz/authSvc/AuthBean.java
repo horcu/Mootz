@@ -1,18 +1,20 @@
 package com.apps.horcu.mootz.authSvc;
 
+import com.apps.horcu.mootz.common.ServiceTask;
+
 /**
  * The object model for the data we are sending through endpoints
  */
 public class AuthBean {
 
     private String error;
-    private String myData;
+    private ServiceTask myData;
 
-    public String getData() {
+    public ServiceTask getData() {
         return myData;
     }
 
-    public void setData(String data) {
+    public void setData(ServiceTask data) {
         myData = data;
     }
 

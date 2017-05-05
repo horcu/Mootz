@@ -19,7 +19,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>CleanupServlet</servlet-name>
-        <url-pattern>/sayClean</url-pattern>
+        <url-pattern>/clean</url-pattern>
     </servlet-mapping>
 
 

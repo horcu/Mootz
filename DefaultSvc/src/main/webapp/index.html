@@ -22,16 +22,10 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="https://developers.google.com/appengine/docs/java/">Google App
-                            Engine</a></li>
-                        <!--<li><a href="https://developers.google.com/appengine/docs/java/endpoints/">Google-->
-                            <!--Cloud Endpoints</a></li>-->
-                        <!--<li>-->
-                            <!--<a href="https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/HelloEndpoints">Connecting-->
-                                <!--your Android application to this backend</a></li>-->
+                        <li><a href="https://developers.google.com/appengine/docs/java/">My adventures with Micro-services</a></li>
                     </ul>
                 </li>
-                <!--<li><a href="/_ah/api/explorer">Google Cloud Endpoints API Explorer</a></li>-->
+                <li><a href="/_ah/api/explorer">API</a></li>
                 <!--<li><a href="https://console.developers.google.com">Google Developers Console</a>-->
                 </li>
             </ul>
@@ -55,7 +49,7 @@
                 <h3>Micro-services / java / gae  </h3>
                 <form>
                     <div class="input-group">
-                        <input type="text" class="form-control input-lg" placeholder="options:  [ /create | /destroy | /sayClean ] will invoke a service through the auth service proxy"
+                        <input type="text" class="form-control input-lg" placeholder="options:  [ /create | /destroy | /clean ] will invoke a service through the auth service proxy"
                                id="nameInput"/>
                         <span class="input-group-btn">
                              <button class="btn btn-default btn-primary btn-group btn-lg"
@@ -94,7 +88,7 @@
     }
     // This is called initially
     function init() {
-      var apiName = defaultApi';
+      var apiName = 'defaultApi';
       var apiVersion = 'v1';
       var apiRoot = 'https://' + window.location.host + '/_ah/api';
       if (window.location.hostname == 'localhost'

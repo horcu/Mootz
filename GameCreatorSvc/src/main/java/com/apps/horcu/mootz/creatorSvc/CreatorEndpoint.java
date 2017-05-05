@@ -80,8 +80,6 @@ public class CreatorEndpoint {
             map.put("message", e.getMessage());
 
             response.setData(map);
-
-
         }
         return response;
     }

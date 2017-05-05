@@ -15,7 +15,14 @@
         <servlet-name>SystemServiceServlet</servlet-name>
         <url-pattern>/_ah/spi/*</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>AuthServlet</servlet-name>
+        <servlet-class>com.apps.horcu.mootz.authSvc.AuthServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>AuthServlet</servlet-name>
+    <url-pattern>/auth</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>

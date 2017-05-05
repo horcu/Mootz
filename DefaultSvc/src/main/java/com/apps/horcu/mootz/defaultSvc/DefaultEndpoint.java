@@ -59,13 +59,21 @@ public class DefaultEndpoint {
             }
 
             //authenticate the request and dispath it to the proper queue
-            conductor.AuthenticateAndDispath(serviceTask);
-
+            if(shouldAuth()) {
+                conductor.AuthenticateThenAddToQueue(serviceTask);
+            }
+            else {
+                conductor.AddToQueue(serviceTask);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         response.setData(serviceTask);
         return response;
+    }
+
+    private boolean shouldAuth() {
+        return false;
     }
 }

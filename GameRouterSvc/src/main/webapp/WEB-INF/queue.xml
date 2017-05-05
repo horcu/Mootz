@@ -1,7 +1,7 @@
 <queue-entries>
 
     <queue>
-        <name>auth-queue</name>
+        <name>a-queue</name>
         <rate>5/s</rate>
         <retry-parameters>
             <min-backoff-seconds>10</min-backoff-seconds>
