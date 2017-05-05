@@ -46,11 +46,11 @@ public class Conductor {
 
         switch (route){
             case "/sayClean" :
-                return new ServiceTask("clean-task","/sayClean", "cleanup-queue", null, "", "1234");
+                return new ServiceTask("clean-task","/sayClean", "clean-queue", null, "", "1234");
             case "/create" :
-                return new ServiceTask("create-task","/create", "creator-queue", null, "", "2345");
+                return new ServiceTask("create-task","/create", "creat-queue", null, "", "2345");
             case "/destroy" :
-                return new ServiceTask("destroy-task","/destroy", "destroyer-queue", null, "", "3456");
+                return new ServiceTask("destroy-task","/destroy", "destroy-queue", null, "", "3456");
             default:
                 return  null;
             }
@@ -61,7 +61,7 @@ public class Conductor {
         String tname =  String.valueOf(new Date().getTime()) + "_auth_";
         try {
             Queue queue = QueueFactory.getQueue("auth-queue");
-            queue.add(TaskOptions.Builder.withUrl(serviceTask.getTaskUrl())
+            queue.add(TaskOptions.Builder.withUrl("/auth")
                     .method(TaskOptions.Method.POST)
                     .taskName(tname));
 

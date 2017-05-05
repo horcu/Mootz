@@ -1,7 +1,0 @@
-<queue-entries>
-    <queue>
-        <name>destroyer-queue</name>
-        <target>v1.destroyersvc</target>
-        <rate>5/s</rate>
-    </queue>
-</queue-entries>

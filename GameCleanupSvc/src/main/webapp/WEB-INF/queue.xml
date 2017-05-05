@@ -1,7 +1,0 @@
-<queue-entries>
-    <queue>
-        <name>cleanup-queue</name>
-        <target>v1.cleanupsvc</target>
-        <rate>5/s</rate>
-    </queue>
-</queue-entries>

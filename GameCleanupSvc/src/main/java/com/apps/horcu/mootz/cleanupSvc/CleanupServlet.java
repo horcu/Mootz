@@ -43,6 +43,5 @@ public class CleanupServlet extends HttpServlet {
         cEp.sayClean("Getter");
         resp.getWriter().println(name + " :now calling Cleanup endpoint"); resp.getWriter().println("Hello " + name);
 
-
     }
 }

@@ -1,7 +1,0 @@
-<queue-entries>
-    <queue>
-        <name>auth-queue</name>
-        <target>v1.authsvc</target>
-        <rate>5/s</rate>
-    </queue>
-</queue-entries>
