@@ -6,23 +6,17 @@
 
 package com.apps.horcu.mootz.authSvc;
 
+import com.apps.horcu.mootz.common.BaseEndpoint;
 import com.apps.horcu.mootz.common.Conductor;
-import com.apps.horcu.mootz.common.IQueueService;
 import com.apps.horcu.mootz.common.ServiceTask;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
-import com.google.appengine.api.taskqueue.Queue;
-import com.google.appengine.api.taskqueue.QueueFactory;
-import com.google.appengine.api.taskqueue.TaskOptions;
-import com.google.appengine.repackaged.com.google.gson.Gson;
-import com.google.appengine.repackaged.com.google.gson.internal.Excluder;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.gson.JsonSyntaxException;
 
 import java.util.Date;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Named;
@@ -39,7 +33,7 @@ import javax.inject.Named;
                 packagePath = ""
         )
 )
-public class AuthEndpoint {
+public class AuthEndpoint extends BaseEndpoint {
 
     /**
      * Firebase specific
@@ -54,14 +48,14 @@ public class AuthEndpoint {
     @ApiMethod(name = "a")
     public AuthBean a(@Named("serviceTask")String serviceTask) {
 
+        ServiceTask sTask = null;
 
         //create the response bean
         AuthBean response = new AuthBean();
-        ServiceTask sTask = null;
         try {
 
-            //deserialize the string
-             sTask = new Gson().fromJson(serviceTask, ServiceTask.class);
+            //deserialize the serviceTask string
+         sTask = CreateServiceTaskObject(serviceTask);
 
         //auth the service call first
         if (!auth(sTask.getUserId())) {

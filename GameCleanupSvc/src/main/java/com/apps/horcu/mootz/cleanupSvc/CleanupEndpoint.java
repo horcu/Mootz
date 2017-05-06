@@ -6,17 +6,14 @@
 
 package com.apps.horcu.mootz.cleanupSvc;
 
+import com.apps.horcu.mootz.common.BaseEndpoint;
 import com.apps.horcu.mootz.common.ResponseBean;
+import com.apps.horcu.mootz.common.ServiceTask;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.FileInputStream;
-import java.io.PipedOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,11 +31,9 @@ import javax.inject.Named;
                 packagePath = ""
         )
 )
-public class CleanupEndpoint {
+public class CleanupEndpoint extends BaseEndpoint {
 
-    /** Firebase specific */
-    private FirebaseApp mootz = null;
-    private DatabaseReference mootzDb;
+
     private static final String CLEANUPQUEUE = "cleanupQueue";
 
     /**
@@ -46,7 +41,10 @@ public class CleanupEndpoint {
      */
 
     @ApiMethod(name = "clean")
-    public ResponseBean clean(@Named("name") String name) {
+    public ResponseBean clean(@Named("serviceTask")String serviceTask) {
+
+
+        ServiceTask sTask = CreateServiceTaskObject(serviceTask);
 
         ResponseBean response = new ResponseBean();
         try {
@@ -54,7 +52,7 @@ public class CleanupEndpoint {
 
             //check if the connection is good and make a new one if its necessary
             if (mootz == null) {
-                if (!InitFirebase()) {
+                if (InitFirebase() ==null) {
                     return response;
                 }
             }
@@ -67,7 +65,7 @@ public class CleanupEndpoint {
                     .getRef();
 
             Map<String,Object> map = new HashMap<>();
-            map.put("message","The cleanup micro-service , " + name);
+            map.put("message","The cleanup micro-service");
             mootzDb.push().setValue(map);
 
 
@@ -92,21 +90,5 @@ public class CleanupEndpoint {
     }
 
 
-    private boolean InitFirebase() {
-        FirebaseOptions options;
-        boolean result = true;
-        try {
-            options = new FirebaseOptions.Builder()
-                    .setServiceAccount(new FileInputStream("service-account.json"))
-                    .setDatabaseUrl("https://mootz-166219.firebaseio.com/")
-                    .build();
 
-            mootz = FirebaseApp.initializeApp(options);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            result =  false;
-        }
-        return result;
-    }
 }

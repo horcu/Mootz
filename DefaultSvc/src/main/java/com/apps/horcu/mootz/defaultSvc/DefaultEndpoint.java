@@ -7,6 +7,7 @@
 package com.apps.horcu.mootz.defaultSvc;
 
 import com.apps.horcu.mootz.common.Conductor;
+import com.apps.horcu.mootz.common.Consts;
 import com.apps.horcu.mootz.common.ServiceTask;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -39,6 +40,7 @@ public class DefaultEndpoint {
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
+
     @ApiMethod(name = "r")
     public DefaultBean r(@Named("route") String route) {
         DefaultBean response = new DefaultBean();
@@ -50,7 +52,7 @@ public class DefaultEndpoint {
             }
 
             //get service task object
-            serviceTask = conductor.getTaskForRoute(route);
+            serviceTask = conductor.GetServiceTaskForRoute(route);
 
             //make sure the path exists
             if (serviceTask == null) {
@@ -58,13 +60,21 @@ public class DefaultEndpoint {
                 return response;
             }
 
-            //authenticate the request and dispath it to the proper queue
-            if(shouldAuth()) {
-                conductor.AuthenticateThenAddToQueue(serviceTask);
+            //authenticate the request and dispatch it to the proper queue
+            if (shouldAuth(serviceTask)) {
+                //set the nextTaskUrl to the path we want to be re directed to when we authenticate
+                serviceTask.setNextTaskUrl(serviceTask.getTaskUrl());
+                serviceTask.setQueueName(Consts.AUTH_QUEUE);
+                //then set the task path to auth so it can do that first
+                serviceTask.setTaskUrl(Consts.AUTH_PATH);
             }
-            else {
-                conductor.AddToQueue(serviceTask);
-            }
+
+            //either way set the previous task url to this. when the request gets there that assignement will be factual
+            serviceTask.setPrevTaskUrl(Consts.DEFAULT_PATH);
+
+            //lastly add the task to the queue
+            conductor.AddToQueue(serviceTask);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -73,7 +83,8 @@ public class DefaultEndpoint {
         return response;
     }
 
-    private boolean shouldAuth() {
-        return false;
+    private boolean shouldAuth(ServiceTask serviceTask) {
+        return serviceTask.getToken().equals("")
+                || serviceTask.getToken() == null;
     }
 }

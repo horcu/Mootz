@@ -17,22 +17,24 @@ public class CleanupServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
+        String serviceTask = req.getParameter("serviceTask");
         resp.setContentType("text/plain");
+
         resp.getWriter().println("Please use the form to POST to this url");
 
         if(cEp == null){
             cEp = new CleanupEndpoint();
         }
 
-        cEp.clean("Getter");
+        cEp.clean(serviceTask);
     }
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-        String name = req.getParameter("name");
+        String serviceTask = req.getParameter("serviceTask");
         resp.setContentType("text/plain");
-        if (name == null) {
+        if (serviceTask == null) {
             resp.getWriter().println("Please enter a name");
         }
 
@@ -40,8 +42,8 @@ public class CleanupServlet extends HttpServlet {
             cEp = new CleanupEndpoint();
         }
 
-        cEp.clean("Getter");
-        resp.getWriter().println(name + " :now calling Cleanup endpoint"); resp.getWriter().println("Hello " + name);
+        cEp.clean(serviceTask);
+        resp.getWriter().println("done!");
 
     }
 }

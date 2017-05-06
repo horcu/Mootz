@@ -6,15 +6,15 @@
 
 package com.apps.horcu.mootz.destroyerSvc;
 
+import com.apps.horcu.mootz.common.BaseEndpoint;
+import com.apps.horcu.mootz.common.ServiceTask;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +32,7 @@ import javax.inject.Named;
                 packagePath = ""
         )
 )
-public class DestroyerEndpoint {
+public class DestroyerEndpoint extends BaseEndpoint {
 
     /** Firebase specific */
     private FirebaseApp mootz = null;
@@ -42,14 +42,15 @@ public class DestroyerEndpoint {
      * A simple endpoint method that takes a name and says Hi back
      */
     @ApiMethod(name = "destroyer")
-    public MyBean destroyer(@Named("name") String name) {
+    public MyBean destroyer(@Named("serviceTask")String serviceTask) {
 
         MyBean response = new MyBean();
         try {
 
+            ServiceTask sTask = CreateServiceTaskObject(serviceTask);
             //check if the connection is good and make a new one if its necessary
             if (mootz == null) {
-                if (!InitFirebase()) {
+                if (InitFirebase() !=null) {
                     return response;
                 }
             }
@@ -62,7 +63,7 @@ public class DestroyerEndpoint {
                     .getRef();
 
             Map<String, Object> map = new HashMap<>();
-            map.put("message", "The destroyer micro-service , " + name);
+            map.put("message", "The destroyer micro-service");
             mootzDb.push().setValue(map);
 
 
@@ -86,23 +87,5 @@ public class DestroyerEndpoint {
 
         }
         return response;
-    }
-
-    private boolean InitFirebase() {
-        FirebaseOptions options;
-        boolean result = true;
-        try {
-            options = new FirebaseOptions.Builder()
-                    .setServiceAccount(new FileInputStream("service-account.json"))
-                    .setDatabaseUrl("https://mootz-166219.firebaseio.com/")
-                    .build();
-
-            mootz = FirebaseApp.initializeApp(options);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            result =  false;
-        }
-        return result;
     }
 }

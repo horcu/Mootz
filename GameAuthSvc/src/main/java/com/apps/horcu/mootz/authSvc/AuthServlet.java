@@ -35,7 +35,7 @@ public class AuthServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         String serviceTask = req.getParameter("serviceTask");
-        resp.setContentType("text/plain");
+
         if (serviceTask == null) {
             resp.getWriter().println("Please enter a name");
             return;
@@ -47,9 +47,8 @@ public class AuthServlet extends HttpServlet {
 
         AuthBean aStatus =  cEp.a(serviceTask);
 
-        if(!aStatus.getError().equals(""))
-        resp.getWriter().println(aStatus.getError());
-        else
-            resp.getWriter().println(aStatus.getData().getTaskName() + " has completed");
+        resp.setContentType("text/plain");
+        resp.getWriter().println("done!");
+
     }
 }
