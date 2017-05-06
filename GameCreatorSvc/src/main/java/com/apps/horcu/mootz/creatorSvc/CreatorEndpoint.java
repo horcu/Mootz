@@ -7,12 +7,17 @@
 package com.apps.horcu.mootz.creatorSvc;
 
 import com.apps.horcu.mootz.common.BaseEndpoint;
+import com.apps.horcu.mootz.common.QueueConductor;
 import com.apps.horcu.mootz.common.ServiceTask;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +36,28 @@ import javax.inject.Named;
         )
 )
 public class CreatorEndpoint extends BaseEndpoint {
+
+    public CreatorEndpoint(){
+
+        try {
+            options = new FirebaseOptions.Builder()
+                    .setServiceAccount(new FileInputStream("/webapp/service-account.json"))
+                    .setDatabaseUrl("https://mootz-166219.firebaseio.com/")
+                    .build();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        mootz = FirebaseApp.initializeApp(options);
+        conductor = new QueueConductor();
+
+        //get the reference for this service in the db
+        dbRef = FirebaseDatabase
+                .getInstance(mootz)
+                .getReference()
+                .child("create")
+                .getRef();
+    }
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
@@ -50,7 +77,7 @@ public class CreatorEndpoint extends BaseEndpoint {
             }
 
             //get the reference for this service in the db
-            mootzDb = FirebaseDatabase
+            dbRef = FirebaseDatabase
                     .getInstance(mootz)
                     .getReference()
                     .child("creator")
@@ -58,7 +85,7 @@ public class CreatorEndpoint extends BaseEndpoint {
 
             Map<String, Object> map = new HashMap<>();
             map.put("message", "The creator micro-service");
-            mootzDb.push().setValue(map);
+            dbRef.push().setValue(map);
             response.setData(map);
 
         } catch (Exception e) {

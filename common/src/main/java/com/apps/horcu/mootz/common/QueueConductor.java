@@ -12,7 +12,7 @@ import java.util.Date;
  * Created by Horatio on 5/5/2017.
  */
 
-public class Conductor {
+public class QueueConductor {
 
     public boolean AddToQueue(ServiceTask serviceTask) throws Exception {
 

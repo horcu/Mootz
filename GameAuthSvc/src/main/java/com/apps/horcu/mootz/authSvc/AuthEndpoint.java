@@ -7,15 +7,18 @@
 package com.apps.horcu.mootz.authSvc;
 
 import com.apps.horcu.mootz.common.BaseEndpoint;
-import com.apps.horcu.mootz.common.Conductor;
+import com.apps.horcu.mootz.common.QueueConductor;
 import com.apps.horcu.mootz.common.ServiceTask;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.JsonSyntaxException;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.UUID;
 
@@ -35,13 +38,27 @@ import javax.inject.Named;
 )
 public class AuthEndpoint extends BaseEndpoint {
 
-    /**
-     * Firebase specific
-     */
-    private FirebaseApp mootz = null;
-    private DatabaseReference mootzDb;
-    Conductor conductor = null;
+    public AuthEndpoint(){
 
+        try {
+            options = new FirebaseOptions.Builder()
+                    .setServiceAccount(new FileInputStream("service-account.json"))
+                    .setDatabaseUrl("https://mootz-166219.firebaseio.com/")
+                    .build();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        mootz = FirebaseApp.initializeApp(options);
+        conductor = new QueueConductor();
+
+        //get the reference for this service in the db
+        dbRef = FirebaseDatabase
+                .getInstance(mootz)
+                .getReference()
+                .child("auth")
+                .getRef();
+    }
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
@@ -71,13 +88,14 @@ public class AuthEndpoint extends BaseEndpoint {
 
         //make sure the conductor isn't null
             if (conductor == null)
-                conductor = new Conductor();
+                conductor = new QueueConductor();
 
             //create the cleanup task add to queue
            if(conductor.AddToQueue(sTask))
             response.setData(sTask);
             else {
-               response.setError("could not add" +  sTask.getTaskName()  + "serviceTask to " + sTask.getQueueName());
+               response.setData(new ServiceTask());
+               response.setError("could not add " +  sTask.getTaskName()  + " serviceTask to " + sTask.getQueueName());
            }
 
         }

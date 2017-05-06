@@ -17,13 +17,20 @@ public class BaseEndpoint {
 
     /** Firebase specific */
     public FirebaseApp mootz = null;
-    public DatabaseReference mootzDb;
+    public DatabaseReference dbRef;
+    public FirebaseOptions options = null;
+    public QueueConductor conductor = null;
+
+
+    public  BaseEndpoint(){
+
+    }
 
     protected FirebaseApp InitFirebase() {
-        FirebaseOptions options;
+
         try {
             options = new FirebaseOptions.Builder()
-                    .setServiceAccount(new FileInputStream("service-account.json"))
+                    .setServiceAccount(new FileInputStream("/service-account.json"))
                     .setDatabaseUrl("https://mootz-166219.firebaseio.com/")
                     .build();
 

@@ -6,14 +6,19 @@
 
 package com.apps.horcu.mootz.defaultSvc;
 
-import com.apps.horcu.mootz.common.Conductor;
+import com.apps.horcu.mootz.common.BaseEndpoint;
+import com.apps.horcu.mootz.common.QueueConductor;
 import com.apps.horcu.mootz.common.Consts;
 import com.apps.horcu.mootz.common.ServiceTask;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DatabaseReference;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import javax.inject.Named;
 
@@ -29,14 +34,22 @@ import javax.inject.Named;
                 packagePath = ""
         )
 )
-public class DefaultEndpoint {
-    /**
-     * Firebase specific
-     */
-    private FirebaseApp mootz = null;
-    private DatabaseReference mootzDb;
-    private Conductor conductor = null;
+public class DefaultEndpoint extends BaseEndpoint {
 
+    public DefaultEndpoint(){
+
+        try {
+            options = new FirebaseOptions.Builder()
+                    .setServiceAccount(new FileInputStream("/webapp/service-account.json"))
+                    .setDatabaseUrl("https://mootz-166219.firebaseio.com/")
+                    .build();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        mootz = FirebaseApp.initializeApp(options);
+        conductor = new QueueConductor();
+    }
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
@@ -48,7 +61,7 @@ public class DefaultEndpoint {
         try {
             //init
             if (conductor == null) {
-                conductor = new Conductor();
+                conductor = new QueueConductor();
             }
 
             //get service task object
