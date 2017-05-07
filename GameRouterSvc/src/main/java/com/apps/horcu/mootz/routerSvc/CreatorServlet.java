@@ -28,6 +28,6 @@ public class CreatorServlet extends HttpServlet {
         if (name == null) {
             resp.getWriter().println("Please enter a name");
         }
-        resp.getWriter().println(name + " :now calling Creator endpoint");
+        resp.getWriter().println(name + " :now calling Create endpoint");
     }
 }

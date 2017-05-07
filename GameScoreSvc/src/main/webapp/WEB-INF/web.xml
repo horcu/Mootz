@@ -5,14 +5,21 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value>com.apps.horcu.mootz.archiveSvc.ArchiveEndpoint</param-value>
+            <param-value>com.apps.horcu.mootz.scoreSvc.ScoreEndpoint</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>SystemServiceServlet</servlet-name>
         <url-pattern>/_ah/spi/*</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>ScoreServlet</servlet-name>
+        <servlet-class>com.apps.horcu.mootz.scoreSvc.ScoreServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ScoreServlet</servlet-name>
+        <url-pattern>/score</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>

@@ -5,7 +5,9 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value>com.apps.horcu.mootz.cleanupSvc.CleanupEndpoint</param-value>
+            <param-value>
+                com.apps.horcu.mootz.cleanupSvc.CleanupEndpoint
+            </param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
@@ -21,7 +23,6 @@
         <servlet-name>CleanupServlet</servlet-name>
         <url-pattern>/clean</url-pattern>
     </servlet-mapping>
-
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

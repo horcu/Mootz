@@ -26,6 +26,7 @@ public class CleanupServlet extends HttpServlet {
             cEp = new CleanupEndpoint();
         }
 
+        if(serviceTask !=null && serviceTask != "")
         cEp.clean(serviceTask);
     }
 
@@ -33,7 +34,7 @@ public class CleanupServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         String serviceTask = req.getParameter("serviceTask");
-        resp.setContentType("text/plain");
+
         if (serviceTask == null) {
             resp.getWriter().println("Please enter a name");
         }
@@ -42,7 +43,11 @@ public class CleanupServlet extends HttpServlet {
             cEp = new CleanupEndpoint();
         }
 
+        if(serviceTask !=null && serviceTask != "")
         cEp.clean(serviceTask);
+
+
+        resp.setContentType("text/plain");
         resp.getWriter().println("done!");
 
     }

@@ -16,4 +16,7 @@ public class Consts {
     public static final String CREATE_QUEUE = "create-queue";
     public static final String DESTROY_QUEUE = "destroy-queue";
     public static final String AUTH_QUEUE = "a-queue";
+    public static final String PUBSUB_QUEUE = "pubsub-queue";
+
+
 }

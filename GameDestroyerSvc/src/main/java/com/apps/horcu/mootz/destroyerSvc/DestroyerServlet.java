@@ -28,14 +28,14 @@ public class DestroyerServlet extends HttpServlet {
             cEp = new DestroyerEndpoint();
         }
 
-        cEp.destroyer(serviceTask);
+        cEp.destroy(serviceTask);
     }
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
         String serviceTask = req.getParameter("serviceTask");
-        resp.setContentType("text/plain");
+
         if (serviceTask == null) {
             resp.getWriter().println("Please enter a name");
         }
@@ -44,7 +44,8 @@ public class DestroyerServlet extends HttpServlet {
             cEp = new DestroyerEndpoint();
         }
 
-        cEp.destroyer(serviceTask);
+        cEp.destroy(serviceTask);
+        resp.setContentType("text/plain");
         resp.getWriter().println("done!");
 
     }

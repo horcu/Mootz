@@ -5,18 +5,29 @@
         <rate>5/s</rate>
     </queue>
     <queue>
-        <name>cleanup-queue</name>
-        <target>v1.cleanupsvc</target>
+        <name>clean-queue</name>
+        <target>v1.cleansvc</target>
         <rate>5/s</rate>
     </queue>
     <queue>
-        <name>creator-queue</name>
-        <target>v1.creatorsvc</target>
+        <name>create-queue</name>
+        <target>v1.createsvc</target>
         <rate>5/s</rate>
     </queue>
     <queue>
-        <name>destroyer-queue</name>
-        <target>v1.destroyersvc</target>
+        <name>destroy-queue</name>
+        <target>v1.destroysvc</target>
+        <rate>5/s</rate>
+    </queue>
+    <queue>
+        <name>score-queue</name>
+        <target>v1.scoresvc</target>
+        <rate>5/s</rate>
+
+    </queue>
+    <queue>
+        <name>pubsub-queue</name>
+        <target>v1.pubsubsvc</target>
         <rate>5/s</rate>
     </queue>
 </queue-entries>

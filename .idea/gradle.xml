@@ -12,8 +12,10 @@
             <option value="$PROJECT_DIR$/Ear-Svc" />
             <option value="$PROJECT_DIR$/GameAuthSvc" />
             <option value="$PROJECT_DIR$/GameCleanupSvc" />
-            <option value="$PROJECT_DIR$/GameCreatorSvc" />
+            <option value="$PROJECT_DIR$/GameCreateSvc" />
             <option value="$PROJECT_DIR$/GameDestroyerSvc" />
+            <option value="$PROJECT_DIR$/GamePubSubSvc" />
+            <option value="$PROJECT_DIR$/GameScoreSvc" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/common" />
           </set>

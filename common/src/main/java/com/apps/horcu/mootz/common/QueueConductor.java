@@ -46,6 +46,10 @@ public class QueueConductor {
                 return new ServiceTask("destroy-task","/destroy", Consts.DESTROY_QUEUE,  "de_1234567890", "3456");
             case "/auth" :
                 return new ServiceTask("auth-task","/a", Consts.AUTH_QUEUE,  "a_1000000009", "9876");
+            case "/pub" :
+                return new ServiceTask("pubsub-task","/pub", Consts.PUBSUB_QUEUE,  "ps_1000000009p", "98762");
+            case "/sub" :
+                return new ServiceTask("pubsub-task","/sub", Consts.PUBSUB_QUEUE,  "ps_1000000009s", "98763");
             default:
                 return  null;
             }

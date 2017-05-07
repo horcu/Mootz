@@ -9,8 +9,9 @@
                 com.apps.horcu.mootz.cleanupSvc.CleanupEndpoint,
                 com.apps.horcu.mootz.authSvc.AuthEndpoint,
                 com.apps.horcu.mootz.destroyerSvc.DestroyerEndpoint,
-                com.apps.horcu.mootz.creatorSvc.CreatorEndpoint,
-                com.apps.horcu.mootz.defaultSvc.DefaultEndpoint
+                com.apps.horcu.mootz.createSvc.CreateEndpoint,
+                com.apps.horcu.mootz.defaultSvc.DefaultEndpoint,
+                com.apps.horcu.mootz.scoreSvc.ScoreEndpoint
 
             </param-value>
         </init-param>

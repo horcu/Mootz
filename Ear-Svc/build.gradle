@@ -29,7 +29,7 @@ dependencies {
 //    compile project(':GameArchiveSvc')
     compile project(':GameAuthSvc')
     compile project(':GameCleanupSvc')
-    compile project(':GameCreatorSvc')
+    compile project(':GameCreateSvc')
     compile project(':GameDestroyerSvc')
     compile project(':DefaultSvc')
 //    compile project(':GameFriendsSvc')
@@ -38,11 +38,11 @@ dependencies {
 //    compile project(':GameMessagingSvc')
 //    compile project(':GameMonitoringSvc')
 //    compile project(':GameNotificationSvc')
-//    compile project(':GameScoreSvc')
+    compile project(':GameScoreSvc')
 //    compile project(':GameStartSvc')
 //    compile project(':GameStateSvc')
 //    compile project(':GameStopSvc')
-//    compile project(':GameSubscriptionSvc')
+    compile project(':GamePubSubSvc')
 }
 
 appengine {

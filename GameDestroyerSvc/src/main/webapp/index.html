@@ -71,8 +71,8 @@
     // A function that attaches a "Say Hello" button click handler
     function enableClick() {
       document.getElementById('helloButton').onclick = function() {
-        var name = document.getElementById('nameInput').value;
-        gapi.client.myApi.sayHi({'name': name}).execute(
+        var serviceTask = document.getElementById('nameInput').value;
+        gapi.client.destroyApi.destroy({'serviceTask': serviceTask}).execute(
           function(response) {
             var outputAlertDiv = document.getElementById('outputAlert');
             outputAlertDiv.style.visibility = 'visible';

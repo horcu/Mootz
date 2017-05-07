@@ -27,7 +27,7 @@ import javax.inject.Named;
  * An endpoint class we are exposing
  */
 @Api(
-        name = "destroyerApi",
+        name = "destroyApi",
         version = "v1",
         namespace = @ApiNamespace(
                 ownerDomain = "mootz.horcu.apps.com",
@@ -62,8 +62,8 @@ public class DestroyerEndpoint extends BaseEndpoint {
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
-    @ApiMethod(name = "destroyer")
-    public MyBean destroyer(@Named("serviceTask")String serviceTask) {
+    @ApiMethod(name = "destroy")
+    public MyBean destroy(@Named("serviceTask")String serviceTask) {
 
         MyBean response = new MyBean();
         try {
@@ -80,11 +80,11 @@ public class DestroyerEndpoint extends BaseEndpoint {
             dbRef = FirebaseDatabase
                     .getInstance(mootz)
                     .getReference()
-                    .child("destroyer")
+                    .child("destroy")
                     .getRef();
 
             Map<String, Object> map = new HashMap<>();
-            map.put("message", "The destroyer micro-service");
+            map.put("message", "The destroy micro-service");
             dbRef.push().setValue(map);
 
 
